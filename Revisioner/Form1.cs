@@ -8,7 +8,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using Inventor;
+using File = System.IO.File;
 
 
 namespace Revisioner
@@ -17,6 +19,9 @@ namespace Revisioner
     {
         Inventor.Application _invApp;
         bool _started = false;
+        private string fullPath;
+        private string pathWithDocument;
+        private bool hasDrawing;
 
         public Form1()
         {
@@ -54,13 +59,13 @@ namespace Revisioner
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.TopMost = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             // Full path of part/assembly
-            var fullPath = _invApp.ActiveDocument.FullFileName;
+            fullPath = _invApp.ActiveDocument.FullFileName;
 
             // Delimiter index
             var delimiterIndexPath = fullPath.LastIndexOf('\\');
@@ -70,7 +75,7 @@ namespace Revisioner
             var directory = fullPath.Substring(0,delimiterIndexPath);
 
             // Document name with path
-            var pathWithDocument = fullPath.Substring(0,delimiterIndexPoint);
+            pathWithDocument = fullPath.Substring(0,delimiterIndexPoint);
 
             // Document name with type 
             var documentNameWithType = fullPath.Substring(delimiterIndexPath + 1);
@@ -79,12 +84,46 @@ namespace Revisioner
             var delimiterIndexName = documentNameWithType.LastIndexOf('.');
             var documentName = documentNameWithType.Substring(0,delimiterIndexName);
 
+            // Check if drawing exists
+            var drawingPath = pathWithDocument + ".idw";
+            hasDrawing = File.Exists(@drawingPath);
+
+            // Show labels
+            docNameWithType.Visible = true;
+            docName.Visible = true;
+            path.Visible = true;
+            this.directory.Visible = true;
+            pathDocument.Visible = true;
+            isDrawing.Visible = true;
+
             // Label assignments
             docNameWithType.Text = documentNameWithType;
             docName.Text = documentName;
             path.Text = fullPath;
             this.directory.Text = directory;
             pathDocument.Text = pathWithDocument;
+            isDrawing.Text = hasDrawing ? "Ja" : "Nein";
+        }
+
+        private void revisionize_Click(object sender, EventArgs e)
+        {
+            // Setup
+            var prefix = "Rev.A";
+            var sourceFile = fullPath;
+            var destFile = $"{pathWithDocument} {prefix}.iam";
+            // Copy
+            System.IO.File.Copy(sourceFile, destFile, true);
+
+            // If drawing applicable
+            if (hasDrawing)
+            {
+                // Setup
+                var sourceFileIDW = $"{pathWithDocument}.idw";
+                var destFileIDW = $"{pathWithDocument} {prefix}.idw";
+                // Copy
+                System.IO.File.Copy(sourceFileIDW,destFileIDW,true);
+            }
+            MessageBox.Show("Erfolgreich revisioniert!");
         }
     }
 }
