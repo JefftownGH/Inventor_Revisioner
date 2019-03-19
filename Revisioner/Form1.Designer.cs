@@ -201,6 +201,7 @@
             this.lblHasRevision.Size = new System.Drawing.Size(46, 17);
             this.lblHasRevision.TabIndex = 15;
             this.lblHasRevision.Text = "label7";
+            this.lblHasRevision.Visible = false;
             // 
             // label7
             // 
@@ -219,6 +220,7 @@
             this.lblNextRevision.Size = new System.Drawing.Size(46, 17);
             this.lblNextRevision.TabIndex = 17;
             this.lblNextRevision.Text = "label8";
+            this.lblNextRevision.Visible = false;
             // 
             // Form1
             // 

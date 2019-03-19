@@ -66,6 +66,14 @@ namespace Revisioner
 
         private void cmdUpdate_Click(object sender, EventArgs e)
         {
+            // Check if active document is of type assembly
+            if (!DocumentChecker("Assembly"))
+            {
+                MessageBox.Show("Kann nur in einer Baugruppe ausgeführt werden.");
+                return;
+            }
+
+
             // Full path of part/assembly
             fullPath = _invApp.ActiveDocument.FullFileName;
 
@@ -99,6 +107,8 @@ namespace Revisioner
             lblDirectory.Visible = true;
             lblPathDocument.Visible = true;
             lblIsDrawing.Visible = true;
+            lblHasRevision.Visible = true;
+            lblNextRevision.Visible = true;
 
             // Label assignments
             lblDocNameWithType.Text = documentNameWithType;
@@ -113,13 +123,20 @@ namespace Revisioner
 
         private void cmdRevisionize_Click(object sender, EventArgs e)
         {
+            // Check if active document is of type assembly
+            if (!DocumentChecker("Assembly"))
+            {
+                MessageBox.Show("Kann nur in einer Baugruppe ausgeführt werden.");
+                return;
+            }
+
             var documentName = Path.GetFileNameWithoutExtension(fullPath);
             var hasRevision = RevisionChecker(documentName);
             var prefix = hasRevision ? NummericRevision(documentName) : 1;
             if (hasRevision)
             {
                 var delimiter = pathWithDocument.IndexOf(' ');
-                pathWithDocument.Substring(delimiter);
+                pathWithDocument = pathWithDocument.Substring(0, delimiter);
             }
 
             // Setup
@@ -160,6 +177,28 @@ namespace Revisioner
             var delimiter = documentName.LastIndexOf('.');
             var currentRevision = int.Parse(documentName.Substring(delimiter + 1));
             return ++currentRevision;
+        }
+
+        private bool DocumentChecker(string allowedDocument)
+        {
+            bool isValid;
+            switch (allowedDocument)
+            {
+                case "Assembly":
+                    isValid = _invApp.ActiveDocumentType == DocumentTypeEnum.kAssemblyDocumentObject ? true : false;
+                    break;
+                case "Drawing":
+                    isValid = _invApp.ActiveDocumentType == DocumentTypeEnum.kDrawingDocumentObject ? true : false;
+                    break;
+                case "Part":
+                    isValid = _invApp.ActiveDocumentType == DocumentTypeEnum.kPartDocumentObject ? true : false;
+                    break;
+                default:
+                    isValid = false;
+                    break;
+            }
+
+            return isValid;
         }
     }
 }
