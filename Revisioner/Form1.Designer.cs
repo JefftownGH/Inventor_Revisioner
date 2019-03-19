@@ -28,51 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.docNameWithType = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.path = new System.Windows.Forms.Label();
+            this.lblDocNameWithType = new System.Windows.Forms.Label();
+            this.cmdUpdate = new System.Windows.Forms.Button();
+            this.lblPath = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.docName = new System.Windows.Forms.Label();
+            this.lblDocName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.isDrawing = new System.Windows.Forms.Label();
+            this.lblIsDrawing = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.directory = new System.Windows.Forms.Label();
+            this.lblDirectory = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.pathDocument = new System.Windows.Forms.Label();
-            this.revisionize = new System.Windows.Forms.Button();
+            this.lblPathDocument = new System.Windows.Forms.Label();
+            this.cmdRevisionize = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblHasRevision = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblNextRevision = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // docNameWithType
+            // lblDocNameWithType
             // 
-            this.docNameWithType.AutoSize = true;
-            this.docNameWithType.Location = new System.Drawing.Point(217, 53);
-            this.docNameWithType.Name = "docNameWithType";
-            this.docNameWithType.Size = new System.Drawing.Size(46, 17);
-            this.docNameWithType.TabIndex = 0;
-            this.docNameWithType.Text = "label1";
-            this.docNameWithType.Visible = false;
+            this.lblDocNameWithType.AutoSize = true;
+            this.lblDocNameWithType.Location = new System.Drawing.Point(217, 53);
+            this.lblDocNameWithType.Name = "lblDocNameWithType";
+            this.lblDocNameWithType.Size = new System.Drawing.Size(46, 17);
+            this.lblDocNameWithType.TabIndex = 0;
+            this.lblDocNameWithType.Text = "label1";
+            this.lblDocNameWithType.Visible = false;
             // 
-            // button1
+            // cmdUpdate
             // 
-            this.button1.Location = new System.Drawing.Point(207, 248);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(229, 56);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Aktualisieren";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.cmdUpdate.Location = new System.Drawing.Point(207, 419);
+            this.cmdUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmdUpdate.Name = "cmdUpdate";
+            this.cmdUpdate.Size = new System.Drawing.Size(229, 57);
+            this.cmdUpdate.TabIndex = 1;
+            this.cmdUpdate.Text = "Aktualisieren";
+            this.cmdUpdate.UseVisualStyleBackColor = true;
+            this.cmdUpdate.Click += new System.EventHandler(this.cmdUpdate_Click);
             // 
-            // path
+            // lblPath
             // 
-            this.path.AutoSize = true;
-            this.path.Location = new System.Drawing.Point(217, 119);
-            this.path.Name = "path";
-            this.path.Size = new System.Drawing.Size(46, 17);
-            this.path.TabIndex = 2;
-            this.path.Text = "label2";
-            this.path.Visible = false;
+            this.lblPath.AutoSize = true;
+            this.lblPath.Location = new System.Drawing.Point(217, 119);
+            this.lblPath.Name = "lblPath";
+            this.lblPath.Size = new System.Drawing.Size(46, 17);
+            this.lblPath.TabIndex = 2;
+            this.lblPath.Text = "label2";
+            this.lblPath.Visible = false;
             // 
             // label3
             // 
@@ -92,20 +97,20 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Pfad";
             // 
-            // docName
+            // lblDocName
             // 
-            this.docName.AutoSize = true;
-            this.docName.Location = new System.Drawing.Point(217, 83);
-            this.docName.Name = "docName";
-            this.docName.Size = new System.Drawing.Size(46, 17);
-            this.docName.TabIndex = 5;
-            this.docName.Text = "label5";
-            this.docName.Visible = false;
+            this.lblDocName.AutoSize = true;
+            this.lblDocName.Location = new System.Drawing.Point(217, 82);
+            this.lblDocName.Name = "lblDocName";
+            this.lblDocName.Size = new System.Drawing.Size(46, 17);
+            this.lblDocName.TabIndex = 5;
+            this.lblDocName.Text = "label5";
+            this.lblDocName.Visible = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 83);
+            this.label1.Location = new System.Drawing.Point(44, 82);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 17);
             this.label1.TabIndex = 6;
@@ -114,21 +119,21 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(42, 210);
+            this.label9.Location = new System.Drawing.Point(43, 210);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(155, 17);
             this.label9.TabIndex = 7;
             this.label9.Text = "Zeichnung vorhanden?";
             // 
-            // isDrawing
+            // lblIsDrawing
             // 
-            this.isDrawing.AutoSize = true;
-            this.isDrawing.Location = new System.Drawing.Point(219, 209);
-            this.isDrawing.Name = "isDrawing";
-            this.isDrawing.Size = new System.Drawing.Size(46, 17);
-            this.isDrawing.TabIndex = 8;
-            this.isDrawing.Text = "label5";
-            this.isDrawing.Visible = false;
+            this.lblIsDrawing.AutoSize = true;
+            this.lblIsDrawing.Location = new System.Drawing.Point(219, 209);
+            this.lblIsDrawing.Name = "lblIsDrawing";
+            this.lblIsDrawing.Size = new System.Drawing.Size(46, 17);
+            this.lblIsDrawing.TabIndex = 8;
+            this.lblIsDrawing.Text = "label5";
+            this.lblIsDrawing.Visible = false;
             // 
             // label2
             // 
@@ -139,15 +144,15 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Verzeichnis";
             // 
-            // directory
+            // lblDirectory
             // 
-            this.directory.AutoSize = true;
-            this.directory.Location = new System.Drawing.Point(218, 151);
-            this.directory.Name = "directory";
-            this.directory.Size = new System.Drawing.Size(46, 17);
-            this.directory.TabIndex = 10;
-            this.directory.Text = "label6";
-            this.directory.Visible = false;
+            this.lblDirectory.AutoSize = true;
+            this.lblDirectory.Location = new System.Drawing.Point(219, 151);
+            this.lblDirectory.Name = "lblDirectory";
+            this.lblDirectory.Size = new System.Drawing.Size(46, 17);
+            this.lblDirectory.TabIndex = 10;
+            this.lblDirectory.Text = "label6";
+            this.lblDirectory.Visible = false;
             // 
             // label6
             // 
@@ -158,45 +163,87 @@
             this.label6.TabIndex = 11;
             this.label6.Text = "Pfad und Dateiname";
             // 
-            // pathDocument
+            // lblPathDocument
             // 
-            this.pathDocument.AutoSize = true;
-            this.pathDocument.Location = new System.Drawing.Point(217, 182);
-            this.pathDocument.Name = "pathDocument";
-            this.pathDocument.Size = new System.Drawing.Size(46, 17);
-            this.pathDocument.TabIndex = 12;
-            this.pathDocument.Text = "label7";
-            this.pathDocument.Visible = false;
+            this.lblPathDocument.AutoSize = true;
+            this.lblPathDocument.Location = new System.Drawing.Point(217, 182);
+            this.lblPathDocument.Name = "lblPathDocument";
+            this.lblPathDocument.Size = new System.Drawing.Size(46, 17);
+            this.lblPathDocument.TabIndex = 12;
+            this.lblPathDocument.Text = "label7";
+            this.lblPathDocument.Visible = false;
             // 
-            // revisionize
+            // cmdRevisionize
             // 
-            this.revisionize.Location = new System.Drawing.Point(467, 248);
-            this.revisionize.Name = "revisionize";
-            this.revisionize.Size = new System.Drawing.Size(226, 56);
-            this.revisionize.TabIndex = 13;
-            this.revisionize.Text = "Revisionier!";
-            this.revisionize.UseVisualStyleBackColor = true;
-            this.revisionize.Click += new System.EventHandler(this.revisionize_Click);
+            this.cmdRevisionize.Location = new System.Drawing.Point(467, 419);
+            this.cmdRevisionize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmdRevisionize.Name = "cmdRevisionize";
+            this.cmdRevisionize.Size = new System.Drawing.Size(227, 57);
+            this.cmdRevisionize.TabIndex = 13;
+            this.cmdRevisionize.Text = "Revisionier!";
+            this.cmdRevisionize.UseVisualStyleBackColor = true;
+            this.cmdRevisionize.Click += new System.EventHandler(this.cmdRevisionize_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(45, 237);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 17);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Revision?";
+            // 
+            // lblHasRevision
+            // 
+            this.lblHasRevision.AutoSize = true;
+            this.lblHasRevision.Location = new System.Drawing.Point(217, 237);
+            this.lblHasRevision.Name = "lblHasRevision";
+            this.lblHasRevision.Size = new System.Drawing.Size(46, 17);
+            this.lblHasRevision.TabIndex = 15;
+            this.lblHasRevision.Text = "label7";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(45, 264);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(118, 17);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Nächste Revision";
+            // 
+            // lblNextRevision
+            // 
+            this.lblNextRevision.AutoSize = true;
+            this.lblNextRevision.Location = new System.Drawing.Point(217, 264);
+            this.lblNextRevision.Name = "lblNextRevision";
+            this.lblNextRevision.Size = new System.Drawing.Size(46, 17);
+            this.lblNextRevision.TabIndex = 17;
+            this.lblNextRevision.Text = "label8";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(715, 316);
-            this.Controls.Add(this.revisionize);
-            this.Controls.Add(this.pathDocument);
+            this.ClientSize = new System.Drawing.Size(715, 487);
+            this.Controls.Add(this.lblNextRevision);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lblHasRevision);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.cmdRevisionize);
+            this.Controls.Add(this.lblPathDocument);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.directory);
+            this.Controls.Add(this.lblDirectory);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.isDrawing);
+            this.Controls.Add(this.lblIsDrawing);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.docName);
+            this.Controls.Add(this.lblDocName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.path);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.docNameWithType);
+            this.Controls.Add(this.lblPath);
+            this.Controls.Add(this.cmdUpdate);
+            this.Controls.Add(this.lblDocNameWithType);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -207,20 +254,24 @@
 
         #endregion
 
-        private System.Windows.Forms.Label docNameWithType;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label path;
+        private System.Windows.Forms.Label lblDocNameWithType;
+        private System.Windows.Forms.Button cmdUpdate;
+        private System.Windows.Forms.Label lblPath;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label docName;
+        private System.Windows.Forms.Label lblDocName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label isDrawing;
+        private System.Windows.Forms.Label lblIsDrawing;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label directory;
+        private System.Windows.Forms.Label lblDirectory;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label pathDocument;
-        private System.Windows.Forms.Button revisionize;
+        private System.Windows.Forms.Label lblPathDocument;
+        private System.Windows.Forms.Button cmdRevisionize;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblHasRevision;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblNextRevision;
     }
 }
 

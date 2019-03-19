@@ -9,8 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.RegularExpressions;
 using Inventor;
 using File = System.IO.File;
+using Path = System.IO.Path;
 
 
 namespace Revisioner
@@ -62,55 +64,67 @@ namespace Revisioner
             this.TopMost = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void cmdUpdate_Click(object sender, EventArgs e)
         {
             // Full path of part/assembly
             fullPath = _invApp.ActiveDocument.FullFileName;
 
-            // Delimiter index
-            var delimiterIndexPath = fullPath.LastIndexOf('\\');
-            var delimiterIndexPoint = fullPath.LastIndexOf('.');
-
             // Directory
-            var directory = fullPath.Substring(0,delimiterIndexPath);
-
-            // Document name with path
-            pathWithDocument = fullPath.Substring(0,delimiterIndexPoint);
-
-            // Document name with type 
-            var documentNameWithType = fullPath.Substring(delimiterIndexPath + 1);
+            var directory = Path.GetDirectoryName(fullPath);
 
             // Document name without type
-            var delimiterIndexName = documentNameWithType.LastIndexOf('.');
-            var documentName = documentNameWithType.Substring(0,delimiterIndexName);
+            var documentName = Path.GetFileNameWithoutExtension(fullPath);
+            
+            // Document name with path
+            pathWithDocument = $@"{directory}\{documentName}";
+
+            // Document name with type 
+            var documentNameWithType = Path.GetFileName(fullPath);
+
 
             // Check if drawing exists
             var drawingPath = pathWithDocument + ".idw";
             hasDrawing = File.Exists(@drawingPath);
 
+            // Check if file has revision
+            var hasRevision = RevisionChecker(documentName);
+
+            // Calculate next revision
+            var nextRevision = hasRevision ? NummericRevision(documentName).ToString() : "1";
+
             // Show labels
-            docNameWithType.Visible = true;
-            docName.Visible = true;
-            path.Visible = true;
-            this.directory.Visible = true;
-            pathDocument.Visible = true;
-            isDrawing.Visible = true;
+            lblDocNameWithType.Visible = true;
+            lblDocName.Visible = true;
+            lblPath.Visible = true;
+            lblDirectory.Visible = true;
+            lblPathDocument.Visible = true;
+            lblIsDrawing.Visible = true;
 
             // Label assignments
-            docNameWithType.Text = documentNameWithType;
-            docName.Text = documentName;
-            path.Text = fullPath;
-            this.directory.Text = directory;
-            pathDocument.Text = pathWithDocument;
-            isDrawing.Text = hasDrawing ? "Ja" : "Nein";
+            lblDocNameWithType.Text = documentNameWithType;
+            lblDocName.Text = documentName;
+            lblPath.Text = fullPath;
+            lblDirectory.Text = directory;
+            lblPathDocument.Text = pathWithDocument;
+            lblIsDrawing.Text = hasDrawing ? "Ja" : "Nein";
+            lblHasRevision.Text = hasRevision ? "Ja" : "Nein";
+            lblNextRevision.Text = nextRevision;
         }
 
-        private void revisionize_Click(object sender, EventArgs e)
+        private void cmdRevisionize_Click(object sender, EventArgs e)
         {
+            var documentName = Path.GetFileNameWithoutExtension(fullPath);
+            var hasRevision = RevisionChecker(documentName);
+            var prefix = hasRevision ? NummericRevision(documentName) : 1;
+            if (hasRevision)
+            {
+                var delimiter = pathWithDocument.IndexOf(' ');
+                pathWithDocument.Substring(delimiter);
+            }
+
             // Setup
-            var prefix = "Rev.A";
             var sourceFile = fullPath;
-            var destFile = $"{pathWithDocument} {prefix}.iam";
+            var destFile = $"{pathWithDocument} Rev.{prefix}.iam";
             // Copy
             System.IO.File.Copy(sourceFile, destFile, true);
 
@@ -119,11 +133,33 @@ namespace Revisioner
             {
                 // Setup
                 var sourceFileIDW = $"{pathWithDocument}.idw";
-                var destFileIDW = $"{pathWithDocument} {prefix}.idw";
+                var destFileIDW = $"{pathWithDocument} Rev.{prefix}.idw";
+
                 // Copy
-                System.IO.File.Copy(sourceFileIDW,destFileIDW,true);
+                try
+                {
+                    System.IO.File.Copy(sourceFileIDW,destFileIDW,true);
+                    MessageBox.Show("Erfolgreich revisioniert!");
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show("Da hat etwas nicht funktioniert..." + error);
+                    throw;
+                }
             }
-            MessageBox.Show("Erfolgreich revisioniert!");
+        }
+
+        private bool RevisionChecker(string documentName)
+        {
+            var rgx = new Regex(@"(?i)rev");
+            return rgx.IsMatch(documentName);
+        }
+
+        private int NummericRevision(string documentName)
+        {
+            var delimiter = documentName.LastIndexOf('.');
+            var currentRevision = int.Parse(documentName.Substring(delimiter + 1));
+            return ++currentRevision;
         }
     }
 }
