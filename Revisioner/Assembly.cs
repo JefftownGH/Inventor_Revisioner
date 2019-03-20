@@ -9,14 +9,14 @@ namespace Revisioner
     {
         private Inventor.Application _inventorObject;
         private Inventor._Document _assemblyObject;
-        private string _fullPath;
-        private string _pathWithDocument;
-        private string _directory;
-        private string _documentName;
-        private string _documentNameWithType;
-        private string _nextRevision;
-        private bool _hasRevision;
-        private bool _hasDrawing;
+        public string FullPath { get; private set; }
+        public string PathWithDocument { get; private set; }
+        public string Directory { get; private set; }
+        public string DocumentName { get; private set; }
+        public string DocumentNameWithType { get; private set; }
+        public string NextRevisionNumber { get; private set; }
+        public bool HasRevision { get; private set; }
+        public bool HasDrawing { get; private set; }
 
         // Constructor
         public Assembly(Inventor.Application inventorObject)
@@ -50,26 +50,26 @@ namespace Revisioner
             }
 
             // Full path of part/assembly
-            this._fullPath = this._inventorObject.ActiveDocument.FullFileName;
+            this.FullPath = this._inventorObject.ActiveDocument.FullFileName;
             // Directory
-            this._directory = Path.GetDirectoryName(this._fullPath);
+            this.Directory = Path.GetDirectoryName(this.FullPath);
             // Document name without type
-            this._documentName = Path.GetFileNameWithoutExtension(this._fullPath);
+            this.DocumentName = Path.GetFileNameWithoutExtension(this.FullPath);
             // Document name with path
-            this._pathWithDocument = $@"{this._directory}\{this._documentName}";
+            this.PathWithDocument = $@"{this.Directory}\{this.DocumentName}";
             // Document name with type 
-            this._documentNameWithType = Path.GetFileName(this._fullPath);
+            this.DocumentNameWithType = Path.GetFileName(this.FullPath);
 
 
             // Check if drawing exists
-            var drawingPath = this._pathWithDocument + ".idw";
-            this._hasDrawing = File.Exists(@drawingPath);
+            var drawingPath = this.PathWithDocument + ".idw";
+            this.HasDrawing = File.Exists(@drawingPath);
 
             // Check if file has revision
-            this._hasRevision = Utility.RevisionChecker(this._documentName);
+            this.HasRevision = Utility.RevisionChecker(this.DocumentName);
 
             // Calculate next revision
-            this._nextRevision = this._hasRevision ? Utility.NummericRevision(this._documentName).ToString() : "1";
+            this.NextRevisionNumber = this.HasRevision ? Utility.NummericRevision(this.DocumentName).ToString() : "1";
         }
 
         // Copy function
@@ -78,27 +78,27 @@ namespace Revisioner
             UpdateInformation();
 
             // Setup
-            var documentName = Path.GetFileNameWithoutExtension(this._fullPath);
+            var documentName = Path.GetFileNameWithoutExtension(this.FullPath);
             var hasRevision = Utility.RevisionChecker(documentName);
             var prefix = hasRevision ? Utility.NummericRevision(documentName) : 1;
             if (hasRevision)
             {
-                var delimiter = this._pathWithDocument.IndexOf(' ');
-                this._pathWithDocument = this._pathWithDocument.Substring(0, delimiter);
+                var delimiter = this.PathWithDocument.IndexOf(' ');
+                this.PathWithDocument = this.PathWithDocument.Substring(0, delimiter);
             }
 
             // Copy pre-setup
-            var sourceFile = this._fullPath;
-            var destFile = $"{this._pathWithDocument } Rev.{prefix}.iam";
+            var sourceFile = this.FullPath;
+            var destFile = $"{this.PathWithDocument } Rev.{prefix}.iam";
             // Copy
             System.IO.File.Copy(sourceFile, destFile, true);
 
             // If drawing applicable
-            if (this._hasDrawing)
+            if (this.HasDrawing)
             {
                 // Setup
-                var sourceFileIDW = $"{this._pathWithDocument }.idw";
-                var destFileIDW = $"{this._pathWithDocument } Rev.{prefix}.idw";
+                var sourceFileIDW = $"{this.PathWithDocument }.idw";
+                var destFileIDW = $"{this.PathWithDocument } Rev.{prefix}.idw";
 
                 // Copy
                 try
