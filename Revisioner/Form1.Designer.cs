@@ -51,7 +51,7 @@
             // lblDocNameWithType
             // 
             this.lblDocNameWithType.AutoSize = true;
-            this.lblDocNameWithType.Location = new System.Drawing.Point(217, 53);
+            this.lblDocNameWithType.Location = new System.Drawing.Point(186, 9);
             this.lblDocNameWithType.Name = "lblDocNameWithType";
             this.lblDocNameWithType.Size = new System.Drawing.Size(46, 17);
             this.lblDocNameWithType.TabIndex = 0;
@@ -60,10 +60,10 @@
             // 
             // cmdUpdate
             // 
-            this.cmdUpdate.Location = new System.Drawing.Point(207, 419);
+            this.cmdUpdate.Location = new System.Drawing.Point(82, 283);
             this.cmdUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmdUpdate.Name = "cmdUpdate";
-            this.cmdUpdate.Size = new System.Drawing.Size(229, 57);
+            this.cmdUpdate.Size = new System.Drawing.Size(227, 57);
             this.cmdUpdate.TabIndex = 1;
             this.cmdUpdate.Text = "Aktualisieren";
             this.cmdUpdate.UseVisualStyleBackColor = true;
@@ -72,7 +72,7 @@
             // lblPath
             // 
             this.lblPath.AutoSize = true;
-            this.lblPath.Location = new System.Drawing.Point(217, 119);
+            this.lblPath.Location = new System.Drawing.Point(186, 77);
             this.lblPath.Name = "lblPath";
             this.lblPath.Size = new System.Drawing.Size(46, 17);
             this.lblPath.TabIndex = 2;
@@ -82,7 +82,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 53);
+            this.label3.Location = new System.Drawing.Point(12, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(151, 17);
             this.label3.TabIndex = 3;
@@ -91,7 +91,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(44, 119);
+            this.label4.Location = new System.Drawing.Point(12, 77);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(37, 17);
             this.label4.TabIndex = 4;
@@ -100,7 +100,7 @@
             // lblDocName
             // 
             this.lblDocName.AutoSize = true;
-            this.lblDocName.Location = new System.Drawing.Point(217, 82);
+            this.lblDocName.Location = new System.Drawing.Point(186, 43);
             this.lblDocName.Name = "lblDocName";
             this.lblDocName.Size = new System.Drawing.Size(46, 17);
             this.lblDocName.TabIndex = 5;
@@ -110,7 +110,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 82);
+            this.label1.Location = new System.Drawing.Point(12, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 17);
             this.label1.TabIndex = 6;
@@ -119,7 +119,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(43, 210);
+            this.label9.Location = new System.Drawing.Point(11, 179);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(155, 17);
             this.label9.TabIndex = 7;
@@ -128,7 +128,7 @@
             // lblIsDrawing
             // 
             this.lblIsDrawing.AutoSize = true;
-            this.lblIsDrawing.Location = new System.Drawing.Point(219, 209);
+            this.lblIsDrawing.Location = new System.Drawing.Point(188, 179);
             this.lblIsDrawing.Name = "lblIsDrawing";
             this.lblIsDrawing.Size = new System.Drawing.Size(46, 17);
             this.lblIsDrawing.TabIndex = 8;
@@ -138,7 +138,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 151);
+            this.label2.Location = new System.Drawing.Point(12, 111);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 17);
             this.label2.TabIndex = 9;
@@ -147,7 +147,7 @@
             // lblDirectory
             // 
             this.lblDirectory.AutoSize = true;
-            this.lblDirectory.Location = new System.Drawing.Point(219, 151);
+            this.lblDirectory.Location = new System.Drawing.Point(188, 111);
             this.lblDirectory.Name = "lblDirectory";
             this.lblDirectory.Size = new System.Drawing.Size(46, 17);
             this.lblDirectory.TabIndex = 10;
@@ -157,7 +157,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(44, 182);
+            this.label6.Location = new System.Drawing.Point(12, 145);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(137, 17);
             this.label6.TabIndex = 11;
@@ -166,7 +166,7 @@
             // lblPathDocument
             // 
             this.lblPathDocument.AutoSize = true;
-            this.lblPathDocument.Location = new System.Drawing.Point(217, 182);
+            this.lblPathDocument.Location = new System.Drawing.Point(186, 145);
             this.lblPathDocument.Name = "lblPathDocument";
             this.lblPathDocument.Size = new System.Drawing.Size(46, 17);
             this.lblPathDocument.TabIndex = 12;
@@ -175,7 +175,7 @@
             // 
             // cmdRevisionize
             // 
-            this.cmdRevisionize.Location = new System.Drawing.Point(467, 419);
+            this.cmdRevisionize.Location = new System.Drawing.Point(406, 283);
             this.cmdRevisionize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmdRevisionize.Name = "cmdRevisionize";
             this.cmdRevisionize.Size = new System.Drawing.Size(227, 57);
@@ -187,7 +187,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(45, 237);
+            this.label5.Location = new System.Drawing.Point(13, 213);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 17);
             this.label5.TabIndex = 14;
@@ -196,7 +196,7 @@
             // lblHasRevision
             // 
             this.lblHasRevision.AutoSize = true;
-            this.lblHasRevision.Location = new System.Drawing.Point(217, 237);
+            this.lblHasRevision.Location = new System.Drawing.Point(186, 213);
             this.lblHasRevision.Name = "lblHasRevision";
             this.lblHasRevision.Size = new System.Drawing.Size(46, 17);
             this.lblHasRevision.TabIndex = 15;
@@ -206,7 +206,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(45, 264);
+            this.label7.Location = new System.Drawing.Point(13, 247);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(118, 17);
             this.label7.TabIndex = 16;
@@ -215,7 +215,7 @@
             // lblNextRevision
             // 
             this.lblNextRevision.AutoSize = true;
-            this.lblNextRevision.Location = new System.Drawing.Point(217, 264);
+            this.lblNextRevision.Location = new System.Drawing.Point(186, 247);
             this.lblNextRevision.Name = "lblNextRevision";
             this.lblNextRevision.Size = new System.Drawing.Size(46, 17);
             this.lblNextRevision.TabIndex = 17;
@@ -226,7 +226,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(715, 487);
+            this.ClientSize = new System.Drawing.Size(715, 368);
             this.Controls.Add(this.lblNextRevision);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lblHasRevision);

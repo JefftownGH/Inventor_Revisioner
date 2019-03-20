@@ -130,6 +130,7 @@ namespace Revisioner
                 return;
             }
 
+            // Setup
             var documentName = Path.GetFileNameWithoutExtension(fullPath);
             var hasRevision = RevisionChecker(documentName);
             var prefix = hasRevision ? NummericRevision(documentName) : 1;
@@ -139,7 +140,7 @@ namespace Revisioner
                 pathWithDocument = pathWithDocument.Substring(0, delimiter);
             }
 
-            // Setup
+            // Copy pre-setup
             var sourceFile = fullPath;
             var destFile = $"{pathWithDocument} Rev.{prefix}.iam";
             // Copy
