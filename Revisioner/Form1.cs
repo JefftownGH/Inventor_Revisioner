@@ -20,6 +20,7 @@ namespace Revisioner
     public partial class Form1 : Form
     {
         Inventor.Application _invApp;
+        private Assembly currentAssembly;
         bool _started = false;
         private string fullPath;
         private string pathWithDocument;
@@ -66,39 +67,8 @@ namespace Revisioner
 
         private void cmdUpdate_Click(object sender, EventArgs e)
         {
-            // Check if active document is of type assembly
-            if (!DocumentChecker("Assembly"))
-            {
-                MessageBox.Show("Kann nur in einer Baugruppe ausgeführt werden.");
-                return;
-            }
-
-
-            // Full path of part/assembly
-            fullPath = _invApp.ActiveDocument.FullFileName;
-
-            // Directory
-            var directory = Path.GetDirectoryName(fullPath);
-
-            // Document name without type
-            var documentName = Path.GetFileNameWithoutExtension(fullPath);
-            
-            // Document name with path
-            pathWithDocument = $@"{directory}\{documentName}";
-
-            // Document name with type 
-            var documentNameWithType = Path.GetFileName(fullPath);
-
-
-            // Check if drawing exists
-            var drawingPath = pathWithDocument + ".idw";
-            hasDrawing = File.Exists(@drawingPath);
-
-            // Check if file has revision
-            var hasRevision = RevisionChecker(documentName);
-
-            // Calculate next revision
-            var nextRevision = hasRevision ? NummericRevision(documentName).ToString() : "1";
+            this.currentAssembly = new Assembly(_invApp);
+            this.currentAssembly.UpdateInformation();
 
             // Show labels
             lblDocNameWithType.Visible = true;
@@ -111,96 +81,20 @@ namespace Revisioner
             lblNextRevision.Visible = true;
 
             // Label assignments
-            lblDocNameWithType.Text = documentNameWithType;
-            lblDocName.Text = documentName;
-            lblPath.Text = fullPath;
-            lblDirectory.Text = directory;
-            lblPathDocument.Text = pathWithDocument;
-            lblIsDrawing.Text = hasDrawing ? "Ja" : "Nein";
-            lblHasRevision.Text = hasRevision ? "Ja" : "Nein";
-            lblNextRevision.Text = nextRevision;
+            lblDocNameWithType.Text = currentAssembly.DocumentNameWithType;
+            lblDocName.Text = currentAssembly.DocumentName;
+            lblPath.Text = currentAssembly.FullPath;
+            lblDirectory.Text = currentAssembly.Directory;
+            lblPathDocument.Text = currentAssembly.PathWithDocument;
+            lblIsDrawing.Text = currentAssembly.HasDrawing ? "Ja" : "Nein";
+            lblHasRevision.Text = currentAssembly.HasRevision ? "Ja" : "Nein";
+            lblNextRevision.Text = currentAssembly.NextRevisionNumber;
         }
 
         private void cmdRevisionize_Click(object sender, EventArgs e)
         {
-            // Check if active document is of type assembly
-            if (!DocumentChecker("Assembly"))
-            {
-                MessageBox.Show("Kann nur in einer Baugruppe ausgeführt werden.");
-                return;
-            }
-
-            // Setup
-            var documentName = Path.GetFileNameWithoutExtension(fullPath);
-            var hasRevision = RevisionChecker(documentName);
-            var prefix = hasRevision ? NummericRevision(documentName) : "01";
-            if (hasRevision)
-            {
-                var delimiter = pathWithDocument.IndexOf(' ');
-                pathWithDocument = pathWithDocument.Substring(0, delimiter);
-            }
-
-            // Copy pre-setup
-            var sourceFile = fullPath;
-            var destFile = $"{pathWithDocument} Rev.{prefix}.iam";
-            // Copy
-            System.IO.File.Copy(sourceFile, destFile, true);
-
-            // If drawing applicable
-            if (hasDrawing)
-            {
-                // Setup
-                var sourceFileIDW = $"{pathWithDocument}.idw";
-                var destFileIDW = $"{pathWithDocument} Rev.{prefix}.idw";
-
-                // Copy
-                try
-                {
-                    System.IO.File.Copy(sourceFileIDW,destFileIDW,true);
-                    MessageBox.Show("Erfolgreich revisioniert!");
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show("Da hat etwas nicht funktioniert..." + error);
-                    throw;
-                }
-            }
-        }
-
-        private bool RevisionChecker(string documentName)
-        {
-            var rgx = new Regex(@"(?i)rev");
-            return rgx.IsMatch(documentName);
-        }
-
-        public static string NummericRevision(string documentName)
-        {
-            var delimiter = documentName.LastIndexOf('.');
-            var currentRevision = int.Parse(documentName.Substring(delimiter + 1));
-            var nextRevision = (++currentRevision).ToString();
-            return nextRevision.Length == 1 ? $"0{nextRevision}" : nextRevision;
-        }
-
-        private bool DocumentChecker(string allowedDocument)
-        {
-            bool isValid;
-            switch (allowedDocument)
-            {
-                case "Assembly":
-                    isValid = _invApp.ActiveDocumentType == DocumentTypeEnum.kAssemblyDocumentObject ? true : false;
-                    break;
-                case "Drawing":
-                    isValid = _invApp.ActiveDocumentType == DocumentTypeEnum.kDrawingDocumentObject ? true : false;
-                    break;
-                case "Part":
-                    isValid = _invApp.ActiveDocumentType == DocumentTypeEnum.kPartDocumentObject ? true : false;
-                    break;
-                default:
-                    isValid = false;
-                    break;
-            }
-
-            return isValid;
+            this.currentAssembly = new Assembly(_invApp);
+            this.currentAssembly.NextRevision();
         }
     }
 }

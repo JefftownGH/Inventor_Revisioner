@@ -40,8 +40,5 @@ namespace Revisioner
             var nextRevision = (++currentRevision).ToString();
             return nextRevision.Length == 1 ? $"0{nextRevision}" : nextRevision;
         }
-
-
-
     }
 }
