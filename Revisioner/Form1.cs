@@ -22,9 +22,6 @@ namespace Revisioner
         Inventor.Application _invApp;
         private Assembly currentAssembly;
         bool _started = false;
-        private string fullPath;
-        private string pathWithDocument;
-        private bool hasDrawing;
 
         public Form1()
         {
@@ -93,7 +90,11 @@ namespace Revisioner
 
         private void cmdRevisionize_Click(object sender, EventArgs e)
         {
-            this.currentAssembly = new Assembly(_invApp);
+            if (this.currentAssembly == null)
+            {
+                MessageBox.Show("Baugruppe wurde noch nicht initialisiert.");
+                return;
+            }
             this.currentAssembly.NextRevision();
         }
     }

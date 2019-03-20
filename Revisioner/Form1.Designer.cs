@@ -65,7 +65,7 @@
             this.cmdUpdate.Name = "cmdUpdate";
             this.cmdUpdate.Size = new System.Drawing.Size(227, 57);
             this.cmdUpdate.TabIndex = 1;
-            this.cmdUpdate.Text = "Aktualisieren";
+            this.cmdUpdate.Text = "Baugruppe initialisieren";
             this.cmdUpdate.UseVisualStyleBackColor = true;
             this.cmdUpdate.Click += new System.EventHandler(this.cmdUpdate_Click);
             // 
@@ -180,7 +180,7 @@
             this.cmdRevisionize.Name = "cmdRevisionize";
             this.cmdRevisionize.Size = new System.Drawing.Size(227, 57);
             this.cmdRevisionize.TabIndex = 13;
-            this.cmdRevisionize.Text = "Revisionier!";
+            this.cmdRevisionize.Text = "Baugruppe revisionieren";
             this.cmdRevisionize.UseVisualStyleBackColor = true;
             this.cmdRevisionize.Click += new System.EventHandler(this.cmdRevisionize_Click);
             // 
@@ -247,7 +247,7 @@
             this.Controls.Add(this.lblDocNameWithType);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Inventor Revisioner";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -25,12 +25,6 @@ namespace Revisioner
             this._assemblyObject = inventorObject.ActiveDocument;
         }
 
-        // Function for validating the current active document with the instance document
-        private bool CurrentDocument(Inventor.Application currentDocument, Inventor.Application instanceDocument)
-        {
-            return currentDocument == instanceDocument;
-        }
-
         // Update function
         public void UpdateInformation()
         {
@@ -43,7 +37,7 @@ namespace Revisioner
 
             // Check if the active document is the same as the instance document
             var currentDocument = (Inventor.Application)Marshal.GetActiveObject("Inventor.Application");
-            if (!CurrentDocument(currentDocument, this._inventorObject))
+            if (!Utility.CurrentDocument(currentDocument, this._inventorObject))
             {
                 MessageBox.Show("Die aktive Baugruppe ist nicht die gleiche wie die vorherige Baugruppe.");
                 return;
@@ -75,8 +69,6 @@ namespace Revisioner
         // Copy function
         public void NextRevision()
         {
-            UpdateInformation();
-
             // Setup
             var documentName = Path.GetFileNameWithoutExtension(this.FullPath);
             var hasRevision = Utility.RevisionChecker(documentName);
@@ -90,8 +82,6 @@ namespace Revisioner
             // Copy pre-setup
             var sourceFile = this.FullPath;
             var destFile = $"{this.PathWithDocument } Rev.{prefix}.iam";
-            // Copy
-            System.IO.File.Copy(sourceFile, destFile, true);
 
             // If drawing applicable
             if (this.HasDrawing)
@@ -100,17 +90,33 @@ namespace Revisioner
                 var sourceFileIDW = $"{this.PathWithDocument }.idw";
                 var destFileIDW = $"{this.PathWithDocument } Rev.{prefix}.idw";
 
-                // Copy
+                // Copy of drawing and assembly
                 try
                 {
+                    System.IO.File.Copy(sourceFile, destFile, true);
                     System.IO.File.Copy(sourceFileIDW, destFileIDW, true);
-                    MessageBox.Show("Erfolgreich revisioniert!");
+                    MessageBox.Show("Baugruppe und Zeichnung erfolgreich revisioniert!");
                 }
                 catch (Exception error)
                 {
                     MessageBox.Show("Da hat etwas nicht funktioniert..." + error);
                     throw;
                 }
+            }
+            else
+            {
+                // Copy of assembly
+                try
+                {
+                    System.IO.File.Copy(sourceFile, destFile, true);
+                    MessageBox.Show("Baugruppe erfolgreich revisioniert!");
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show("Da hat etwas nicht funktioniert..." + error);
+                    throw;
+                }
+
             }
 
         }

@@ -5,6 +5,7 @@ namespace Revisioner
 {
     public static class Utility
     {
+        // Function for checking if the active document is of given type
         public static bool DocumentChecker(string allowedDocument, Inventor.Application inventorObject)
         {
             bool isValid;
@@ -27,18 +28,26 @@ namespace Revisioner
             return isValid;
         }
 
+        // Function for checking if the assembly already has a revision
         public static bool RevisionChecker(string documentName)
         {
             var rgx = new Regex(@"(?i)rev");
             return rgx.IsMatch(documentName);
         }
 
+        // Function for returning the next revision
         public static string NummericRevision(string documentName)
         {
             var delimiter = documentName.LastIndexOf('.');
             var currentRevision = int.Parse(documentName.Substring(delimiter + 1));
             var nextRevision = (++currentRevision).ToString();
             return nextRevision.Length == 1 ? $"0{nextRevision}" : nextRevision;
+        }
+
+        // Function for validating the current active document with the instance document
+        public static bool CurrentDocument(Inventor.Application currentDocument, Inventor.Application instanceDocument)
+        {
+            return currentDocument == instanceDocument;
         }
     }
 }
