@@ -133,7 +133,7 @@ namespace Revisioner
             // Setup
             var documentName = Path.GetFileNameWithoutExtension(fullPath);
             var hasRevision = RevisionChecker(documentName);
-            var prefix = hasRevision ? NummericRevision(documentName) : 1;
+            var prefix = hasRevision ? NummericRevision(documentName) : "01";
             if (hasRevision)
             {
                 var delimiter = pathWithDocument.IndexOf(' ');
@@ -173,11 +173,12 @@ namespace Revisioner
             return rgx.IsMatch(documentName);
         }
 
-        private int NummericRevision(string documentName)
+        public static string NummericRevision(string documentName)
         {
             var delimiter = documentName.LastIndexOf('.');
             var currentRevision = int.Parse(documentName.Substring(delimiter + 1));
-            return ++currentRevision;
+            var nextRevision = (++currentRevision).ToString();
+            return nextRevision.Length == 1 ? $"0{nextRevision}" : nextRevision;
         }
 
         private bool DocumentChecker(string allowedDocument)

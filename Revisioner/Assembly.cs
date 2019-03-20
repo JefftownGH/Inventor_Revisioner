@@ -80,7 +80,7 @@ namespace Revisioner
             // Setup
             var documentName = Path.GetFileNameWithoutExtension(this.FullPath);
             var hasRevision = Utility.RevisionChecker(documentName);
-            var prefix = hasRevision ? Utility.NummericRevision(documentName) : 1;
+            var prefix = hasRevision ? Utility.NummericRevision(documentName) : "01";
             if (hasRevision)
             {
                 var delimiter = this.PathWithDocument.IndexOf(' ');

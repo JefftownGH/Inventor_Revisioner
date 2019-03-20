@@ -33,11 +33,12 @@ namespace Revisioner
             return rgx.IsMatch(documentName);
         }
 
-        public static int NummericRevision(string documentName)
+        public static string NummericRevision(string documentName)
         {
             var delimiter = documentName.LastIndexOf('.');
             var currentRevision = int.Parse(documentName.Substring(delimiter + 1));
-            return ++currentRevision;
+            var nextRevision = (++currentRevision).ToString();
+            return nextRevision.Length == 1 ? $"0{nextRevision}" : nextRevision;
         }
 
 
