@@ -47,6 +47,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.lblNextRevision = new System.Windows.Forms.Label();
             this.cmdOpenDrawing = new System.Windows.Forms.Button();
+            this.cmdThing = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblDocNameWithType
@@ -66,7 +67,7 @@
             this.cmdUpdate.Name = "cmdUpdate";
             this.cmdUpdate.Size = new System.Drawing.Size(184, 57);
             this.cmdUpdate.TabIndex = 1;
-            this.cmdUpdate.Text = "Baugruppe initialisieren";
+            this.cmdUpdate.Text = "Objekt initialisieren";
             this.cmdUpdate.UseVisualStyleBackColor = true;
             this.cmdUpdate.Click += new System.EventHandler(this.cmdUpdate_Click);
             // 
@@ -181,7 +182,7 @@
             this.cmdRevisionize.Name = "cmdRevisionize";
             this.cmdRevisionize.Size = new System.Drawing.Size(184, 57);
             this.cmdRevisionize.TabIndex = 13;
-            this.cmdRevisionize.Text = "Baugruppe revisionieren";
+            this.cmdRevisionize.Text = "Objekt revisionieren";
             this.cmdRevisionize.UseVisualStyleBackColor = true;
             this.cmdRevisionize.Click += new System.EventHandler(this.cmdRevisionize_Click);
             // 
@@ -233,11 +234,22 @@
             this.cmdOpenDrawing.UseVisualStyleBackColor = true;
             this.cmdOpenDrawing.Click += new System.EventHandler(this.cmdOpenDrawing_Click);
             // 
+            // cmdThing
+            // 
+            this.cmdThing.Location = new System.Drawing.Point(535, 118);
+            this.cmdThing.Name = "cmdThing";
+            this.cmdThing.Size = new System.Drawing.Size(135, 70);
+            this.cmdThing.TabIndex = 19;
+            this.cmdThing.Text = "Tu dein Ding";
+            this.cmdThing.UseVisualStyleBackColor = true;
+            this.cmdThing.Click += new System.EventHandler(this.cmdThing_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(715, 368);
+            this.Controls.Add(this.cmdThing);
             this.Controls.Add(this.cmdOpenDrawing);
             this.Controls.Add(this.lblNextRevision);
             this.Controls.Add(this.label7);
@@ -287,6 +299,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblNextRevision;
         private System.Windows.Forms.Button cmdOpenDrawing;
+        private System.Windows.Forms.Button cmdThing;
     }
 }
 

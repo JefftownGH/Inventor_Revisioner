@@ -102,5 +102,13 @@ namespace Revisioner
         {
             currentAssembly?.OpenDrawingAndReplace();
         }
+
+        private void cmdThing_Click(object sender, EventArgs e)
+        {
+            this.currentAssembly = new Assembly(this._invApp);
+            this.currentAssembly?.UpdateInformation();
+            this.currentAssembly?.NextRevision();
+            this.currentAssembly?.OpenDrawingAndReplace();
+        }
     }
 }
