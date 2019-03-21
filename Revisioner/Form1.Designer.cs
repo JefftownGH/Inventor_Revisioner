@@ -46,6 +46,7 @@
             this.lblHasRevision = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lblNextRevision = new System.Windows.Forms.Label();
+            this.cmdOpenDrawing = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblDocNameWithType
@@ -60,10 +61,10 @@
             // 
             // cmdUpdate
             // 
-            this.cmdUpdate.Location = new System.Drawing.Point(82, 283);
+            this.cmdUpdate.Location = new System.Drawing.Point(20, 285);
             this.cmdUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmdUpdate.Name = "cmdUpdate";
-            this.cmdUpdate.Size = new System.Drawing.Size(227, 57);
+            this.cmdUpdate.Size = new System.Drawing.Size(184, 57);
             this.cmdUpdate.TabIndex = 1;
             this.cmdUpdate.Text = "Baugruppe initialisieren";
             this.cmdUpdate.UseVisualStyleBackColor = true;
@@ -175,10 +176,10 @@
             // 
             // cmdRevisionize
             // 
-            this.cmdRevisionize.Location = new System.Drawing.Point(406, 283);
+            this.cmdRevisionize.Location = new System.Drawing.Point(265, 285);
             this.cmdRevisionize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmdRevisionize.Name = "cmdRevisionize";
-            this.cmdRevisionize.Size = new System.Drawing.Size(227, 57);
+            this.cmdRevisionize.Size = new System.Drawing.Size(184, 57);
             this.cmdRevisionize.TabIndex = 13;
             this.cmdRevisionize.Text = "Baugruppe revisionieren";
             this.cmdRevisionize.UseVisualStyleBackColor = true;
@@ -222,11 +223,22 @@
             this.lblNextRevision.Text = "label8";
             this.lblNextRevision.Visible = false;
             // 
+            // cmdOpenDrawing
+            // 
+            this.cmdOpenDrawing.Location = new System.Drawing.Point(510, 285);
+            this.cmdOpenDrawing.Name = "cmdOpenDrawing";
+            this.cmdOpenDrawing.Size = new System.Drawing.Size(184, 57);
+            this.cmdOpenDrawing.TabIndex = 18;
+            this.cmdOpenDrawing.Text = "Öffne Zeichnung";
+            this.cmdOpenDrawing.UseVisualStyleBackColor = true;
+            this.cmdOpenDrawing.Click += new System.EventHandler(this.cmdOpenDrawing_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(715, 368);
+            this.Controls.Add(this.cmdOpenDrawing);
             this.Controls.Add(this.lblNextRevision);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lblHasRevision);
@@ -274,6 +286,7 @@
         private System.Windows.Forms.Label lblHasRevision;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblNextRevision;
+        private System.Windows.Forms.Button cmdOpenDrawing;
     }
 }
 

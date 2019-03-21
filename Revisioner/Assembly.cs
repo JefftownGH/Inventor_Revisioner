@@ -1,7 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Inventor;
+using File = System.IO.File;
+using Path = System.IO.Path;
 
 namespace Revisioner
 {
@@ -10,11 +12,13 @@ namespace Revisioner
         private Inventor.Application _inventorObject;
         private Inventor._Document _assemblyObject;
         public string FullPath { get; private set; }
+        public string FullPathWithRev { get; private set; }
         public string PathWithDocument { get; private set; }
         public string Directory { get; private set; }
         public string DocumentName { get; private set; }
         public string DocumentNameWithType { get; private set; }
         public string NextRevisionNumber { get; private set; }
+        public string DrawingPathWithRev { get; private set; }
         public bool HasRevision { get; private set; }
         public bool HasDrawing { get; private set; }
 
@@ -81,20 +85,21 @@ namespace Revisioner
 
             // Copy pre-setup
             var sourceFile = this.FullPath;
-            var destFile = $"{this.PathWithDocument } Rev.{prefix}.iam";
+            this.FullPathWithRev = $"{this.PathWithDocument } Rev.{prefix}.iam";
+            var destFile = this.FullPathWithRev;
 
             // If drawing applicable
             if (this.HasDrawing)
             {
                 // Setup
                 var sourceFileIDW = $"{this.PathWithDocument }.idw";
-                var destFileIDW = $"{this.PathWithDocument } Rev.{prefix}.idw";
+                this.DrawingPathWithRev = $"{this.PathWithDocument } Rev.{prefix}.idw";
 
                 // Copy of drawing and assembly
                 try
                 {
                     System.IO.File.Copy(sourceFile, destFile, true);
-                    System.IO.File.Copy(sourceFileIDW, destFileIDW, true);
+                    System.IO.File.Copy(sourceFileIDW, this.DrawingPathWithRev, true);
                     MessageBox.Show("Baugruppe und Zeichnung erfolgreich revisioniert!");
                 }
                 catch (Exception error)
@@ -113,12 +118,52 @@ namespace Revisioner
                 }
                 catch (Exception error)
                 {
-                    MessageBox.Show("Da hat etwas nicht funktioniert..." + error);
+                    MessageBox.Show("Da hat etwas nicht funktioniert: " + error.Message);
                     throw;
                 }
 
             }
 
+        }
+
+        public void OpenDrawingAndReplace()
+        {
+            // Opens the copied drawing (with new revision)
+            Inventor._Document revisedDrawing;
+            if (this.DrawingPathWithRev != null)
+            {
+                // Silent Inventor on
+                this._inventorObject.SilentOperation = true;
+                // Open drawing
+                revisedDrawing = this._inventorObject.Documents.Open(this.DrawingPathWithRev, false);
+
+                // Replace all references
+                var allDrawingReferences = revisedDrawing.ReferencedFileDescriptors;
+                try
+                {
+                    foreach (FileDescriptor reference in allDrawingReferences)
+                    {
+                        if (reference.FullFileName == this.FullPath)
+                        {
+                            reference.ReplaceReference(this.FullPathWithRev);
+                            MessageBox.Show("Baugruppe ersetzt.");
+                        }
+                    }
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show("Da hat etwas nicht funktioniert: " + error.Message);
+                    throw;
+                }
+
+                // Save drawing
+                revisedDrawing.Save();
+                // Close drawing
+                revisedDrawing.Close();
+
+                // Silent Inventor off
+                this._inventorObject.SilentOperation = false;
+            }
         }
     }
 }
