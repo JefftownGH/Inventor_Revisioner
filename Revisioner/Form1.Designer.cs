@@ -229,7 +229,7 @@
             this.cmdOpenDrawing.Name = "cmdOpenDrawing";
             this.cmdOpenDrawing.Size = new System.Drawing.Size(184, 57);
             this.cmdOpenDrawing.TabIndex = 18;
-            this.cmdOpenDrawing.Text = "Öffne Zeichnung";
+            this.cmdOpenDrawing.Text = "Zeichnungsreferenz ersetzen";
             this.cmdOpenDrawing.UseVisualStyleBackColor = true;
             this.cmdOpenDrawing.Click += new System.EventHandler(this.cmdOpenDrawing_Click);
             // 

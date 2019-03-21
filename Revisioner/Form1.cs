@@ -100,7 +100,7 @@ namespace Revisioner
 
         private void cmdOpenDrawing_Click(object sender, EventArgs e)
         {
-            this.currentAssembly.OpenDrawingAndReplace();
+            currentAssembly?.OpenDrawingAndReplace();
         }
     }
 }

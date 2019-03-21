@@ -129,14 +129,13 @@ namespace Revisioner
         public void OpenDrawingAndReplace()
         {
             // Opens the copied drawing (with new revision)
-            Inventor._Document revisedDrawing;
             if (this.DrawingPathWithRev != null)
             {
                 // Silent Inventor on
                 this._inventorObject.SilentOperation = true;
                 // Open drawing
-                revisedDrawing = this._inventorObject.Documents.Open(this.DrawingPathWithRev, false);
-
+                this._inventorObject.Documents.Open(this.DrawingPathWithRev, true);
+                var revisedDrawing = this._inventorObject.ActiveDocument.File;
                 // Replace all references
                 var allDrawingReferences = revisedDrawing.ReferencedFileDescriptors;
                 try
@@ -146,7 +145,7 @@ namespace Revisioner
                         if (reference.FullFileName == this.FullPath)
                         {
                             reference.ReplaceReference(this.FullPathWithRev);
-                            MessageBox.Show("Baugruppe ersetzt.");
+                            MessageBox.Show("Baugruppenreferenz ersetzt.");
                         }
                     }
                 }
@@ -157,9 +156,9 @@ namespace Revisioner
                 }
 
                 // Save drawing
-                revisedDrawing.Save();
+                this._inventorObject.ActiveDocument.Save();
                 // Close drawing
-                revisedDrawing.Close();
+                this._inventorObject.ActiveDocument.Close();
 
                 // Silent Inventor off
                 this._inventorObject.SilentOperation = false;
