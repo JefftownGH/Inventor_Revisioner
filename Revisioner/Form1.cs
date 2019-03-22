@@ -21,7 +21,6 @@ namespace Revisioner
     {
         Inventor.Application _invApp;
         private Assembly currentAssembly;
-        bool _started = false;
 
         public Form1()
         {
@@ -45,7 +44,6 @@ namespace Revisioner
                     //running. We will use this Boolean to test in Form1.Designer.cs 
                     //in the dispose method whether or not the Inventor App should
                     //be shut down when the form is closed.
-                    _started = true;
 
                 }
                 catch (Exception ex2)
@@ -68,21 +66,13 @@ namespace Revisioner
             this.currentAssembly.UpdateInformation();
 
             // Show labels
-            lblDocNameWithType.Visible = true;
-            lblDocName.Visible = true;
             lblPath.Visible = true;
-            lblDirectory.Visible = true;
-            lblPathDocument.Visible = true;
             lblIsDrawing.Visible = true;
             lblHasRevision.Visible = true;
             lblNextRevision.Visible = true;
 
             // Label assignments
-            lblDocNameWithType.Text = currentAssembly.DocumentNameWithType;
-            lblDocName.Text = currentAssembly.DocumentName;
             lblPath.Text = currentAssembly.FullPath;
-            lblDirectory.Text = currentAssembly.Directory;
-            lblPathDocument.Text = currentAssembly.PathWithDocument;
             lblIsDrawing.Text = currentAssembly.HasDrawing ? "Ja" : "Nein";
             lblHasRevision.Text = currentAssembly.HasRevision ? "Ja" : "Nein";
             lblNextRevision.Text = currentAssembly.NextRevisionNumber;
@@ -105,6 +95,12 @@ namespace Revisioner
 
         private void cmdThing_Click(object sender, EventArgs e)
         {
+            // Check if active document is of type assembly or part
+            if (!Utility.DocumentChecker("Assembly", this._invApp) && !Utility.DocumentChecker("Part", this._invApp))
+            {
+                MessageBox.Show("Kann nur in einer Baugruppe oder Bauteil ausgeführt werden.");
+                return;
+            }
             this.currentAssembly = new Assembly(this._invApp);
             this.currentAssembly?.UpdateInformation();
             this.currentAssembly?.NextRevision();

@@ -44,6 +44,15 @@ namespace Revisioner
             return nextRevision.Length == 1 ? $"0{nextRevision}" : nextRevision;
         }
 
+        // Function for returning the previous revision
+        public static string PrevNummericRevision(string documentName)
+        {
+            var delimiter = documentName.LastIndexOf('.');
+            var currentRevision = int.Parse(documentName.Substring(delimiter + 1));
+            var prevRevision = (--currentRevision).ToString();
+            return prevRevision.Length == 1 ? $"0{prevRevision}" : prevRevision;
+        }
+
         // Function for validating the current active document with the instance document
         public static bool CurrentDocument(Inventor.Application currentDocument, Inventor.Application instanceDocument)
         {

@@ -13,12 +13,12 @@ namespace Revisioner
         private Inventor._Document _assemblyObject;
         public string FullPath { get; private set; }
         public string FullPathWithRev { get; private set; }
+        public string DrawingPath { get; private set; }
+        public string DrawingPathWithRev { get; private set; }
         public string PathWithDocument { get; private set; }
         public string Directory { get; private set; }
         public string DocumentName { get; private set; }
-        public string DocumentNameWithType { get; private set; }
         public string NextRevisionNumber { get; private set; }
-        public string DrawingPathWithRev { get; private set; }
         public string FileExtension { get; private set; }
         public string Part { get; private set; }
         public bool HasRevision { get; private set; }
@@ -35,7 +35,7 @@ namespace Revisioner
         // Update function
         public void UpdateInformation()
         {
-            // Check if active document is of type assembly
+            // Check if active document is of type assembly or part
             if (!Utility.DocumentChecker("Assembly", this._inventorObject) && !Utility.DocumentChecker("Part", this._inventorObject))
             {
                 MessageBox.Show("Kann nur in einer Baugruppe oder Bauteil ausgeführt werden.");
@@ -58,8 +58,6 @@ namespace Revisioner
             this.DocumentName = Path.GetFileNameWithoutExtension(this.FullPath);
             // Document name with path
             this.PathWithDocument = $@"{this.Directory}\{this.DocumentName}";
-            // Document name with type 
-            this.DocumentNameWithType = Path.GetFileName(this.FullPath);
             // Extension
             this.FileExtension = Path.GetExtension(this.FullPath);
             // Partname
@@ -80,33 +78,26 @@ namespace Revisioner
         // Copy function
         public void NextRevision()
         {
-            // Setup
-            var documentName = Path.GetFileNameWithoutExtension(this.FullPath);
-            var hasRevision = Utility.RevisionChecker(documentName);
-            var prefix = hasRevision ? Utility.NummericRevision(documentName) : "01";
-            if (hasRevision)
+            // Revision Setup
+            var prefix = this.HasRevision? Utility.NummericRevision(this.DocumentName) : "01";
+            if (this.HasRevision)
             {
                 var delimiter = this.PathWithDocument.IndexOf(' ');
                 this.PathWithDocument = this.PathWithDocument.Substring(0, delimiter);
             }
 
             // Copy pre-setup
-            var sourceFile = this.FullPath;
+            this.DrawingPath = $"{this.FullPath.Substring(0, this.FullPath.Length - 4)}.idw";
             this.FullPathWithRev = $"{this.PathWithDocument } Rev.{prefix}{this.FileExtension}";
-            var destFile = this.FullPathWithRev;
+            this.DrawingPathWithRev = $"{this.PathWithDocument } Rev.{prefix}.idw";
 
             // If drawing applicable
             if (this.HasDrawing)
             {
-                // Setup
-                var sourceFileIDW = $"{this.PathWithDocument }.idw";
-                this.DrawingPathWithRev = $"{this.PathWithDocument } Rev.{prefix}.idw";
-
-                // Copy of drawing and assembly / part
                 try
                 {
-                    System.IO.File.Copy(sourceFile, destFile, true);
-                    System.IO.File.Copy(sourceFileIDW, this.DrawingPathWithRev, true);
+                    System.IO.File.Copy(this.FullPath, this.FullPathWithRev, true);
+                    System.IO.File.Copy(this.DrawingPath, this.DrawingPathWithRev, true);
                     MessageBox.Show($"{this.Part} und Zeichnung erfolgreich revisioniert!");
                 }
                 catch (Exception error)
@@ -120,7 +111,7 @@ namespace Revisioner
                 // Copy of assembly / part
                 try
                 {
-                    System.IO.File.Copy(sourceFile, destFile, true);
+                    System.IO.File.Copy(this.FullPath, this.FullPathWithRev, true);
                     MessageBox.Show($"{this.Part} erfolgreich revisioniert!");
                 }
                 catch (Exception error)
@@ -145,7 +136,6 @@ namespace Revisioner
                 var revisedDrawing = this._inventorObject.ActiveDocument.File;
                 // Replace all references
                 var allDrawingReferences = revisedDrawing.ReferencedFileDescriptors;
-                var part = this.FileExtension == ".iam" ? "Baugruppe" : "Bauteil";
                 try
                 {
                     foreach (FileDescriptor reference in allDrawingReferences)
@@ -162,7 +152,6 @@ namespace Revisioner
                     MessageBox.Show("Da hat etwas nicht funktioniert: " + error.Message);
                     throw;
                 }
-
                 // Save drawing
                 this._inventorObject.ActiveDocument.Save();
                 // Close drawing
