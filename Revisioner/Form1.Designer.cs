@@ -28,30 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmdUpdate = new System.Windows.Forms.Button();
             this.lblPath = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.lblIsDrawing = new System.Windows.Forms.Label();
-            this.cmdRevisionize = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.lblHasRevision = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lblNextRevision = new System.Windows.Forms.Label();
-            this.cmdOpenDrawing = new System.Windows.Forms.Button();
-            this.cmdThing = new System.Windows.Forms.Button();
+            this.cmdRevisionize = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // cmdUpdate
-            // 
-            this.cmdUpdate.Location = new System.Drawing.Point(20, 285);
-            this.cmdUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmdUpdate.Name = "cmdUpdate";
-            this.cmdUpdate.Size = new System.Drawing.Size(184, 57);
-            this.cmdUpdate.TabIndex = 1;
-            this.cmdUpdate.Text = "Objekt initialisieren";
-            this.cmdUpdate.UseVisualStyleBackColor = true;
-            this.cmdUpdate.Click += new System.EventHandler(this.cmdUpdate_Click);
             // 
             // lblPath
             // 
@@ -61,7 +47,6 @@
             this.lblPath.Size = new System.Drawing.Size(46, 17);
             this.lblPath.TabIndex = 2;
             this.lblPath.Text = "label2";
-            this.lblPath.Visible = false;
             // 
             // label4
             // 
@@ -89,18 +74,6 @@
             this.lblIsDrawing.Size = new System.Drawing.Size(46, 17);
             this.lblIsDrawing.TabIndex = 8;
             this.lblIsDrawing.Text = "label5";
-            this.lblIsDrawing.Visible = false;
-            // 
-            // cmdRevisionize
-            // 
-            this.cmdRevisionize.Location = new System.Drawing.Point(265, 285);
-            this.cmdRevisionize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmdRevisionize.Name = "cmdRevisionize";
-            this.cmdRevisionize.Size = new System.Drawing.Size(184, 57);
-            this.cmdRevisionize.TabIndex = 13;
-            this.cmdRevisionize.Text = "Objekt revisionieren";
-            this.cmdRevisionize.UseVisualStyleBackColor = true;
-            this.cmdRevisionize.Click += new System.EventHandler(this.cmdRevisionize_Click);
             // 
             // label5
             // 
@@ -119,7 +92,6 @@
             this.lblHasRevision.Size = new System.Drawing.Size(46, 17);
             this.lblHasRevision.TabIndex = 15;
             this.lblHasRevision.Text = "label7";
-            this.lblHasRevision.Visible = false;
             // 
             // label7
             // 
@@ -138,45 +110,31 @@
             this.lblNextRevision.Size = new System.Drawing.Size(46, 17);
             this.lblNextRevision.TabIndex = 17;
             this.lblNextRevision.Text = "label8";
-            this.lblNextRevision.Visible = false;
             // 
-            // cmdOpenDrawing
+            // cmdRevisionize
             // 
-            this.cmdOpenDrawing.Location = new System.Drawing.Point(510, 285);
-            this.cmdOpenDrawing.Name = "cmdOpenDrawing";
-            this.cmdOpenDrawing.Size = new System.Drawing.Size(184, 57);
-            this.cmdOpenDrawing.TabIndex = 18;
-            this.cmdOpenDrawing.Text = "Zeichnungsreferenz ersetzen";
-            this.cmdOpenDrawing.UseVisualStyleBackColor = true;
-            this.cmdOpenDrawing.Click += new System.EventHandler(this.cmdOpenDrawing_Click);
-            // 
-            // cmdThing
-            // 
-            this.cmdThing.Location = new System.Drawing.Point(20, 162);
-            this.cmdThing.Name = "cmdThing";
-            this.cmdThing.Size = new System.Drawing.Size(184, 57);
-            this.cmdThing.TabIndex = 19;
-            this.cmdThing.Text = "Revisionier Baugruppe / Bauteil";
-            this.cmdThing.UseVisualStyleBackColor = true;
-            this.cmdThing.Click += new System.EventHandler(this.cmdThing_Click);
+            this.cmdRevisionize.Location = new System.Drawing.Point(20, 162);
+            this.cmdRevisionize.Name = "cmdRevisionize";
+            this.cmdRevisionize.Size = new System.Drawing.Size(323, 57);
+            this.cmdRevisionize.TabIndex = 19;
+            this.cmdRevisionize.Text = "Revisionier Baugruppe / Bauteil";
+            this.cmdRevisionize.UseVisualStyleBackColor = true;
+            this.cmdRevisionize.Click += new System.EventHandler(this.cmdRevisionize_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(715, 368);
-            this.Controls.Add(this.cmdThing);
-            this.Controls.Add(this.cmdOpenDrawing);
+            this.ClientSize = new System.Drawing.Size(647, 241);
+            this.Controls.Add(this.cmdRevisionize);
             this.Controls.Add(this.lblNextRevision);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lblHasRevision);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.cmdRevisionize);
             this.Controls.Add(this.lblIsDrawing);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblPath);
-            this.Controls.Add(this.cmdUpdate);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Inventor Revisioner";
@@ -187,18 +145,15 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button cmdUpdate;
         private System.Windows.Forms.Label lblPath;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblIsDrawing;
-        private System.Windows.Forms.Button cmdRevisionize;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblHasRevision;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblNextRevision;
-        private System.Windows.Forms.Button cmdOpenDrawing;
-        private System.Windows.Forms.Button cmdThing;
+        private System.Windows.Forms.Button cmdRevisionize;
     }
 }
 

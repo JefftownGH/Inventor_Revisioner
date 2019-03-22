@@ -58,18 +58,8 @@ namespace Revisioner
         private void Form1_Load(object sender, EventArgs e)
         {
             this.TopMost = true;
-        }
-
-        private void cmdUpdate_Click(object sender, EventArgs e)
-        {
             this.currentAssembly = new Assembly(_invApp);
             this.currentAssembly.UpdateInformation();
-
-            // Show labels
-            lblPath.Visible = true;
-            lblIsDrawing.Visible = true;
-            lblHasRevision.Visible = true;
-            lblNextRevision.Visible = true;
 
             // Label assignments
             lblPath.Text = currentAssembly.FullPath;
@@ -80,29 +70,12 @@ namespace Revisioner
 
         private void cmdRevisionize_Click(object sender, EventArgs e)
         {
-            if (this.currentAssembly == null)
-            {
-                MessageBox.Show("Baugruppe wurde noch nicht initialisiert.");
-                return;
-            }
-            this.currentAssembly.NextRevision();
-        }
-
-        private void cmdOpenDrawing_Click(object sender, EventArgs e)
-        {
-            currentAssembly?.OpenDrawingAndReplace();
-        }
-
-        private void cmdThing_Click(object sender, EventArgs e)
-        {
             // Check if active document is of type assembly or part
             if (!Utility.DocumentChecker("Assembly", this._invApp) && !Utility.DocumentChecker("Part", this._invApp))
             {
                 MessageBox.Show("Kann nur in einer Baugruppe oder Bauteil ausgeführt werden.");
                 return;
             }
-            this.currentAssembly = new Assembly(this._invApp);
-            this.currentAssembly?.UpdateInformation();
             this.currentAssembly?.NextRevision();
             this.currentAssembly?.OpenDrawingAndReplace();
         }

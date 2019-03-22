@@ -72,7 +72,7 @@ namespace Revisioner
             this.HasRevision = Utility.RevisionChecker(this.DocumentName);
 
             // Calculate next revision
-            this.NextRevisionNumber = this.HasRevision ? Utility.NummericRevision(this.DocumentName).ToString() : "1";
+            this.NextRevisionNumber = this.HasRevision ? Utility.NummericRevision(this.DocumentName).ToString() : "01";
         }
 
         // Copy function
@@ -127,7 +127,7 @@ namespace Revisioner
         public void OpenDrawingAndReplace()
         {
             // Opens the copied drawing (with new revision)
-            if (this.DrawingPathWithRev != null)
+            if (this.HasDrawing)
             {
                 // Silent Inventor on
                 this._inventorObject.SilentOperation = true;
