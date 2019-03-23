@@ -62,7 +62,7 @@ namespace Revisioner
             this._currentInventorObject.UpdateInformation();
 
             // Label assignments
-            lblPath.Text = _currentInventorObject.FullPath;
+            lblDocumentName.Text = _currentInventorObject.DocumentName;
             lblIsDrawing.Text = _currentInventorObject.HasDrawing ? "Ja" : "Nein";
             lblHasRevision.Text = _currentInventorObject.HasRevision ? "Ja" : "Nein";
             lblNextRevision.Text = _currentInventorObject.NextRevisionNumber;

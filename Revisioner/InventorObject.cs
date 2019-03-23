@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Inventor;
 using File = System.IO.File;
@@ -9,19 +8,19 @@ namespace Revisioner
 {
     public class InventorObject
     {
-        private readonly Inventor.Application _inventorObject;
-        public string FullPath { get; private set; }
-        public string FullPathWithRev { get; private set; }
-        public string DrawingPath { get; private set; }
-        public string DrawingPathWithRev { get; private set; }
-        public string PathWithDocument { get; private set; }
-        public string Directory { get; private set; }
         public string DocumentName { get; private set; }
         public string NextRevisionNumber { get; private set; }
-        public string FileExtension { get; private set; }
-        public string Part { get; private set; }
         public bool HasRevision { get; private set; }
         public bool HasDrawing { get; private set; }
+        private readonly Inventor.Application _inventorObject;
+        private string FullPath { get; set; }
+        private string FullPathWithRev { get; set; }
+        private string DrawingPath { get; set; }
+        private string DrawingPathWithRev { get; set; }
+        private string PathWithDocument { get; set; }
+        private string Directory { get; set; }
+        private string FileExtension { get; set; }
+        private string Part { get; set; }
 
         // Constructor
         public InventorObject(Inventor.Application inventorObject)

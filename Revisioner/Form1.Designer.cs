@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblPath = new System.Windows.Forms.Label();
+            this.lblDocumentName = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.lblIsDrawing = new System.Windows.Forms.Label();
@@ -39,23 +39,23 @@
             this.cmdRevisionize = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lblPath
+            // lblDocumentName
             // 
-            this.lblPath.AutoSize = true;
-            this.lblPath.Location = new System.Drawing.Point(186, 9);
-            this.lblPath.Name = "lblPath";
-            this.lblPath.Size = new System.Drawing.Size(46, 17);
-            this.lblPath.TabIndex = 2;
-            this.lblPath.Text = "label2";
+            this.lblDocumentName.AutoSize = true;
+            this.lblDocumentName.Location = new System.Drawing.Point(186, 9);
+            this.lblDocumentName.Name = "lblDocumentName";
+            this.lblDocumentName.Size = new System.Drawing.Size(46, 17);
+            this.lblDocumentName.TabIndex = 2;
+            this.lblDocumentName.Text = "label2";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 17);
+            this.label4.Size = new System.Drawing.Size(76, 17);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Pfad";
+            this.label4.Text = "Dateiname";
             // 
             // label9
             // 
@@ -113,7 +113,7 @@
             // 
             // cmdRevisionize
             // 
-            this.cmdRevisionize.Location = new System.Drawing.Point(20, 162);
+            this.cmdRevisionize.Location = new System.Drawing.Point(26, 162);
             this.cmdRevisionize.Name = "cmdRevisionize";
             this.cmdRevisionize.Size = new System.Drawing.Size(323, 57);
             this.cmdRevisionize.TabIndex = 19;
@@ -125,7 +125,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(647, 241);
+            this.ClientSize = new System.Drawing.Size(374, 241);
             this.Controls.Add(this.cmdRevisionize);
             this.Controls.Add(this.lblNextRevision);
             this.Controls.Add(this.label7);
@@ -134,7 +134,7 @@
             this.Controls.Add(this.lblIsDrawing);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.lblPath);
+            this.Controls.Add(this.lblDocumentName);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Inventor Revisioner";
@@ -145,7 +145,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label lblPath;
+        private System.Windows.Forms.Label lblDocumentName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblIsDrawing;
