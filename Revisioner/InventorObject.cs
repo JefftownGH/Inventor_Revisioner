@@ -80,6 +80,16 @@ namespace Revisioner
             this.FullPathWithRev = $"{this.PathWithDocument } Rev.{prefix}{this.FileExtension}";
             this.DrawingPathWithRev = $"{this.PathWithDocument } Rev.{prefix}.idw";
 
+            if (File.Exists(FullPathWithRev) || File.Exists(DrawingPathWithRev))
+            {
+                var result = MessageBox.Show("Zeichnung und/oder Bauteil/Baugruppe besteht. \nÜberschreiben?", "Warnung",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
             // If drawing applicable
             if (this.HasDrawing)
             {
