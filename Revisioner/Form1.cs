@@ -58,7 +58,20 @@ namespace Revisioner
         private void Form1_Load(object sender, EventArgs e)
         {
             this.TopMost = true;
-            this._currentInventorObject = new InventorObject(_invApp);
+            if (Utility.DocumentChecker("Assembly", _invApp))
+            {
+                this._currentInventorObject = new Assembly(_invApp);
+                cmdRevisionize.Text = "Revisionier Baugruppe";
+            } else if (Utility.DocumentChecker("Part", _invApp))
+            {
+                this._currentInventorObject = new Part(_invApp);
+                cmdRevisionize.Text = "Revisionier Bauteil";
+            }
+            else
+            {
+                MessageBox.Show("Kann nur in einer Baugruppe oder Bauteil ausgeführt werden.");
+                return;
+            }
             this._currentInventorObject.UpdateInformation();
 
             // Label assignments
@@ -70,12 +83,6 @@ namespace Revisioner
 
         private void cmdRevisionize_Click(object sender, EventArgs e)
         {
-            // Check if active document is of type assembly or part
-            if (!Utility.DocumentChecker("Assembly", this._invApp) && !Utility.DocumentChecker("Part", this._invApp))
-            {
-                MessageBox.Show("Kann nur in einer Baugruppe oder Bauteil ausgeführt werden.");
-                return;
-            }
             this._currentInventorObject?.CopyAndReplace();
             this.Close();
         }

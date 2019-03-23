@@ -6,7 +6,7 @@ using Path = System.IO.Path;
 
 namespace Revisioner
 {
-    public class InventorObject
+    public abstract class InventorObject
     {
         public string DocumentName { get; private set; }
         public string NextRevisionNumber { get; private set; }
@@ -19,11 +19,11 @@ namespace Revisioner
         private string DrawingPathWithRev { get; set; }
         private string PathWithDocument { get; set; }
         private string Directory { get; set; }
-        private string FileExtension { get; set; }
-        private string Part { get; set; }
+        protected virtual string FileExtension { get; set; }
+        protected virtual string ObjectType { get; set; }
 
         // Constructor
-        public InventorObject(Inventor.Application inventorObject)
+        protected InventorObject(Inventor.Application inventorObject)
         {
             this._inventorObject = inventorObject;
         }
@@ -47,11 +47,6 @@ namespace Revisioner
             this.DocumentName = Path.GetFileNameWithoutExtension(this.FullPath);
             // Document name with path
             this.PathWithDocument = $@"{this.Directory}\{this.DocumentName}";
-            // Extension
-            this.FileExtension = Path.GetExtension(this.FullPath);
-            // Partname
-            this.Part = this.FileExtension == ".iam" ? "Baugruppe" : "Bauteil";
-
 
             // Check if drawing exists
             var drawingPath = this.PathWithDocument + ".idw";
@@ -82,7 +77,7 @@ namespace Revisioner
 
             if (File.Exists(FullPathWithRev) || File.Exists(DrawingPathWithRev))
             {
-                var result = MessageBox.Show("Zeichnung und/oder Bauteil/Baugruppe besteht. \nÜberschreiben?", "Warnung",
+                var result = MessageBox.Show($"{(this.HasDrawing ? "Zeichnung und " : "")}{this.ObjectType} besteht. \nÜberschreiben?", "Warnung",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.No)
                 {
@@ -97,7 +92,7 @@ namespace Revisioner
                 {
                     System.IO.File.Copy(this.FullPath, this.FullPathWithRev, true);
                     System.IO.File.Copy(this.DrawingPath, this.DrawingPathWithRev, true);
-                    MessageBox.Show($"{this.Part} und Zeichnung erfolgreich revisioniert!");
+                    MessageBox.Show($"{this.ObjectType} und Zeichnung erfolgreich revisioniert!");
                 }
                 catch (Exception error)
                 {
@@ -111,7 +106,7 @@ namespace Revisioner
                 try
                 {
                     System.IO.File.Copy(this.FullPath, this.FullPathWithRev, true);
-                    MessageBox.Show($"{this.Part} erfolgreich revisioniert!");
+                    MessageBox.Show($"{this.ObjectType} erfolgreich revisioniert!");
                 }
                 catch (Exception error)
                 {
@@ -142,7 +137,7 @@ namespace Revisioner
                         if (reference.FullFileName == this.FullPath)
                         {
                             reference.ReplaceReference(this.FullPathWithRev);
-                            MessageBox.Show($"{this.Part}referenz ersetzt.");
+                            MessageBox.Show($"{this.ObjectType}referenz ersetzt.");
                         }
                     }
                 }
