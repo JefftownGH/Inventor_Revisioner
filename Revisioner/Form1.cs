@@ -19,8 +19,8 @@ namespace Revisioner
 {
     public partial class Form1 : Form
     {
-        Inventor.Application _invApp;
-        private Assembly currentAssembly;
+        readonly Inventor.Application _invApp;
+        private InventorObject _currentInventorObject;
 
         public Form1()
         {
@@ -58,14 +58,14 @@ namespace Revisioner
         private void Form1_Load(object sender, EventArgs e)
         {
             this.TopMost = true;
-            this.currentAssembly = new Assembly(_invApp);
-            this.currentAssembly.UpdateInformation();
+            this._currentInventorObject = new InventorObject(_invApp);
+            this._currentInventorObject.UpdateInformation();
 
             // Label assignments
-            lblPath.Text = currentAssembly.FullPath;
-            lblIsDrawing.Text = currentAssembly.HasDrawing ? "Ja" : "Nein";
-            lblHasRevision.Text = currentAssembly.HasRevision ? "Ja" : "Nein";
-            lblNextRevision.Text = currentAssembly.NextRevisionNumber;
+            lblPath.Text = _currentInventorObject.FullPath;
+            lblIsDrawing.Text = _currentInventorObject.HasDrawing ? "Ja" : "Nein";
+            lblHasRevision.Text = _currentInventorObject.HasRevision ? "Ja" : "Nein";
+            lblNextRevision.Text = _currentInventorObject.NextRevisionNumber;
         }
 
         private void cmdRevisionize_Click(object sender, EventArgs e)
@@ -76,8 +76,8 @@ namespace Revisioner
                 MessageBox.Show("Kann nur in einer Baugruppe oder Bauteil ausgeführt werden.");
                 return;
             }
-            this.currentAssembly?.NextRevision();
-            this.currentAssembly?.OpenDrawingAndReplace();
+            this._currentInventorObject?.CopyAndReplace();
+            this.Close();
         }
     }
 }

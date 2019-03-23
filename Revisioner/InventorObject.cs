@@ -7,10 +7,9 @@ using Path = System.IO.Path;
 
 namespace Revisioner
 {
-    public class Assembly
+    public class InventorObject
     {
-        private Inventor.Application _inventorObject;
-        private Inventor._Document _assemblyObject;
+        private readonly Inventor.Application _inventorObject;
         public string FullPath { get; private set; }
         public string FullPathWithRev { get; private set; }
         public string DrawingPath { get; private set; }
@@ -25,10 +24,9 @@ namespace Revisioner
         public bool HasDrawing { get; private set; }
 
         // Constructor
-        public Assembly(Inventor.Application inventorObject)
+        public InventorObject(Inventor.Application inventorObject)
         {
             this._inventorObject = inventorObject;
-            this._assemblyObject = inventorObject.ActiveDocument;
         }
 
 
@@ -39,14 +37,6 @@ namespace Revisioner
             if (!Utility.DocumentChecker("Assembly", this._inventorObject) && !Utility.DocumentChecker("Part", this._inventorObject))
             {
                 MessageBox.Show("Kann nur in einer Baugruppe oder Bauteil ausgeführt werden.");
-                return;
-            }
-
-            // Check if the active document is the same as the instance document
-            var currentDocument = (Inventor.Application)Marshal.GetActiveObject("Inventor.Application");
-            if (!Utility.CurrentDocument(currentDocument, this._inventorObject))
-            {
-                MessageBox.Show("Die aktive Baugruppe / Bauteil ist nicht die gleiche wie die vorherige Baugruppe.");
                 return;
             }
 
@@ -76,13 +66,13 @@ namespace Revisioner
         }
 
         // Copy function
-        public void NextRevision()
+        private void NextRevision()
         {
             // Revision Setup
             var prefix = this.HasRevision? Utility.NummericRevision(this.DocumentName) : "01";
             if (this.HasRevision)
             {
-                var delimiter = this.PathWithDocument.IndexOf(' ');
+                var delimiter = this.PathWithDocument.LastIndexOf('R') - 1;
                 this.PathWithDocument = this.PathWithDocument.Substring(0, delimiter);
             }
 
@@ -124,7 +114,7 @@ namespace Revisioner
 
         }
 
-        public void OpenDrawingAndReplace()
+        private void OpenDrawingAndReplace()
         {
             // Opens the copied drawing (with new revision)
             if (this.HasDrawing)
@@ -160,6 +150,14 @@ namespace Revisioner
                 // Silent Inventor off
                 this._inventorObject.SilentOperation = false;
             }
+        }
+
+        public void CopyAndReplace()
+        {
+            // Copies the assembly / part and associated drawing if applicable
+            this.NextRevision();
+            // Replace the reference to the assembly / part in the drawing
+            this.OpenDrawingAndReplace();
         }
     }
 }
