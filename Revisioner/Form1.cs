@@ -58,11 +58,11 @@ namespace Revisioner
         private void Form1_Load(object sender, EventArgs e)
         {
             this.TopMost = true;
-            if (Utility.DocumentChecker("Assembly", _invApp))
+            if (Utility.DocumentChecker(Utility.DataTypes.Assembly, _invApp))
             {
                 this._currentInventorObject = new Assembly(_invApp);
                 cmdRevisionize.Text = "Revisionier Baugruppe";
-            } else if (Utility.DocumentChecker("Part", _invApp))
+            } else if (Utility.DocumentChecker(Utility.DataTypes.Part, _invApp))
             {
                 this._currentInventorObject = new Part(_invApp);
                 cmdRevisionize.Text = "Revisionier Bauteil";
@@ -70,6 +70,7 @@ namespace Revisioner
             else
             {
                 MessageBox.Show("Kann nur in einer Baugruppe oder Bauteil ausgeführt werden.");
+                this.Close();
                 return;
             }
             this._currentInventorObject.UpdateInformation();

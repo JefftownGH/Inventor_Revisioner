@@ -33,7 +33,7 @@ namespace Revisioner
         public void UpdateInformation()
         {
             // Check if active document is of type assembly or part
-            if (!Utility.DocumentChecker("Assembly", this._inventorObject) && !Utility.DocumentChecker("Part", this._inventorObject))
+            if (!Utility.DocumentChecker(Utility.DataTypes.Assembly, this._inventorObject) && !Utility.DocumentChecker(Utility.DataTypes.Part, this._inventorObject))
             {
                 MessageBox.Show("Kann nur in einer Baugruppe oder Bauteil ausgeführt werden.");
                 return;

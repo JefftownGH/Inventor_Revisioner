@@ -1,23 +1,31 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using Inventor;
 
 namespace Revisioner
 {
     public static class Utility
     {
+        public enum DataTypes
+        {
+            Assembly = 0,
+            Drawing = 1,
+            Part = 2
+        }
         // Function for checking if the active document is of given type
-        public static bool DocumentChecker(string allowedDocument, Inventor.Application inventorObject)
+        public static bool DocumentChecker(DataTypes allowedDocument, Inventor.Application inventorObject)
         {
             bool isValid;
             switch (allowedDocument)
             {
-                case "Assembly":
+                case DataTypes.Assembly:
                     isValid = inventorObject.ActiveDocumentType == DocumentTypeEnum.kAssemblyDocumentObject ? true : false;
                     break;
-                case "Drawing":
+                case DataTypes.Drawing:
                     isValid = inventorObject.ActiveDocumentType == DocumentTypeEnum.kDrawingDocumentObject ? true : false;
                     break;
-                case "Part":
+                case DataTypes.Part:
                     isValid = inventorObject.ActiveDocumentType == DocumentTypeEnum.kPartDocumentObject ? true : false;
                     break;
                 default:
